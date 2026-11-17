@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card" style="max-width:440px;margin:48px auto;">
+  <h1 style="margin-bottom:8px;">Sign In — Diabetes Management System</h1>
+  <p style="color:#64748B;font-size:14px;margin-bottom:18px;">Access your personal glucose logs and care tools.</p>
+  <form method="POST">
+    <label>Email</label>
+    <input type="email" name="email" required />
+    <label>Password</label>
+    <input type="password" name="password" required />
+    <button class="btn btn-primary" type="submit" style="width:100%;justify-content:center;">Sign In</button>
+  </form>
+  <p style="margin-top:16px;font-size:14px;">New user? <a href="{{ url_for('register') }}">Create an account</a></p>
+</div>
+{% endblock %}

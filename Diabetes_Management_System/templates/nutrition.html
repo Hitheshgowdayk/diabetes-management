@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <h1>Food &amp; Nutrition Guide</h1>
+  <p style="color:#64748B;font-size:14px;">Educational diabetes nutrition and lifestyle guidance.</p>
+</div>
+<div class="grid-2">
+  {% for item in articles %}
+  <div class="card">
+    <span style="font-size:12px;color:#0D9488;font-weight:600;">{{ item.category }}</span>
+    <h2 style="margin-top:4px;">{{ item.title }}</h2>
+    <p style="margin-top:8px;color:#334155;">{{ item.content }}</p>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

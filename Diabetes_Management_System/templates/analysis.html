@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <h1>Glucose Trend Analysis</h1>
+  <p style="color:#64748B;font-size:14px;">Interactive Chart.js visualization of your recorded fasting and post-meal readings.</p>
+  <canvas id="trendChart" height="110" style="margin-top:20px;"></canvas>
+</div>
+<script>
+  const raw = {{ readings | tojson }};
+  const labels = raw.map(r => r.recorded_at);
+  const fasting = raw.map(r => r.reading_type === 'fasting' ? r.reading_value : null);
+  const postMeal = raw.map(r => r.reading_type === 'post_meal' ? r.reading_value : null);
+  new Chart(document.getElementById('trendChart'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Fasting (mg/dL)', data: fasting, borderColor: '#0F2942', spanGaps: true },
+        { label: 'Post-Meal (mg/dL)', data: postMeal, borderColor: '#0D9488', spanGaps: true }
+      ]
+    }
+  });
+</script>
+{% endblock %}

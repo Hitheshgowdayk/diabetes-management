@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <h1>Glucose Monitoring</h1>
+  <p style="color:#64748B;font-size:14px;margin-top:4px;">
+    Fasting Target: {{ targets.fasting_min }}–{{ targets.fasting_max }} mg/dL · Post-Meal Limit: &le; {{ targets.post_meal_max }} mg/dL
+  </p>
+</div>
+
+<div class="grid-2">
+  <div class="card">
+    <form id="glucose-form" method="POST">
+      <label for="reading_type">Reading Category</label>
+      <select id="reading_type" name="reading_type" required>
+        <option value="fasting">Fasting</option>
+        <option value="post_meal">Post-Meal</option>
+      </select>
+      <label for="reading_value">Glucose Value (mg/dL)</label>
+      <input id="reading_value" type="number" step="0.1" min="20" max="600" name="reading_value" required />
+      <label for="notes">Notes (Optional)</label>
+      <textarea id="notes" name="notes" rows="2"></textarea>
+      <button class="btn btn-primary" type="submit">Evaluate &amp; Save</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h2>Evaluation Output</h2>
+    {% if evaluation %}
+      <p style="margin-top:12px;"><strong>{{ evaluation.label }}</strong></p>
+      <p style="margin-top:8px;">{{ evaluation.message }}</p>
+      {% if evaluation.warning %}
+        <div class="flash flash-error" style="margin-top:12px;">{{ evaluation.warning }}</div>
+      {% endif %}
+    {% else %}
+      <p style="margin-top:12px;color:#64748B;">Submit a reading to view its immediate evaluation.</p>
+    {% endif %}
+    <p style="margin-top:16px;font-size:12px;color:#64748B;">
+      Reference targets vary between individuals. Displayed results are informational only and are not medical diagnoses.
+    </p>
+  </div>
+</div>
+{% endblock %}

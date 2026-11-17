@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diabetes Management System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="layout">
+    {% if session.get('user_id') %}
+    <aside class="sidebar">
+      <div class="brand">Diabetes Management</div>
+      <a class="nav-link" href="{{ url_for('dashboard') }}">1. Dashboard</a>
+      <a class="nav-link" href="{{ url_for('glucose') }}">2. Glucose Monitoring</a>
+      <a class="nav-link" href="{{ url_for('history') }}">3. Reading History</a>
+      <a class="nav-link" href="{{ url_for('analysis') }}">4. Glucose Analysis</a>
+      <a class="nav-link" href="{{ url_for('emergency') }}">5. Emergency Support</a>
+      <a class="nav-link" href="{{ url_for('hospitals') }}">6. Hospital Finder</a>
+      <a class="nav-link" href="{{ url_for('nutrition') }}">7. Food and Nutrition</a>
+      <a class="nav-link" href="{{ url_for('reminders') }}">8. Medicine Reminders</a>
+      <a class="nav-link" href="{{ url_for('appointments') }}">9. Appointments</a>
+      <a class="nav-link" href="{{ url_for('profile') }}">10. My Profile</a>
+      <a class="nav-link" href="{{ url_for('logout') }}">11. Logout</a>
+    </aside>
+    {% endif %}
+    <main class="main">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% for category, msg in messages %}
+          <div class="flash flash-{{ category }}">{{ msg }}</div>
+        {% endfor %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

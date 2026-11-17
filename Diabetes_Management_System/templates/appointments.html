@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="grid-2">
+  <div class="card">
+    <h2>Add Doctor Appointment</h2>
+    <form method="POST">
+      <label>Doctor Name</label><input type="text" name="doctor_name" required />
+      <label>Specialty</label><input type="text" name="specialty" />
+      <label>Clinic / Hospital</label><input type="text" name="clinic_name" required />
+      <label>Date</label><input type="date" name="appointment_date" required />
+      <label>Time</label><input type="time" name="appointment_time" required />
+      <label>Reason</label><textarea name="reason" rows="2"></textarea>
+      <button class="btn btn-primary" type="submit">Schedule Appointment</button>
+    </form>
+  </div>
+  <div class="card">
+    <h2>Upcoming Appointments</h2>
+    {% for a in appointments %}
+      <div style="border-bottom:1px solid #E2E8F0;padding:10px 0;">
+        <strong>{{ a.doctor_name }}</strong> — {{ a.clinic_name }}<br/>
+        <span style="font-size:13px;color:#64748B;">{{ a.appointment_date }} {{ a.appointment_time }}</span>
+        <form method="POST" action="{{ url_for('delete_appointment', appt_id=a.id) }}" style="margin-top:6px;">
+          <button class="btn btn-outline" type="submit">Delete</button>
+        </form>
+      </div>
+    {% else %}
+      <p style="color:#64748B;margin-top:10px;">No appointments scheduled.</p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="emergency-box">
+  <h1>India National Emergency Number: 112</h1>
+  <p style="margin-top:8px;">Call <strong>112</strong> immediately in any life-threatening medical emergency.</p>
+  <a class="btn btn-danger" href="tel:112" style="margin-top:12px;">Call 112 Now</a>
+</div>
+<div class="card">
+  <h2>Critical Safety Instruction</h2>
+  <p style="margin-top:10px;">
+    If a person is <strong>unconscious, severely drowsy, or unable to swallow safely</strong>,
+    <strong>NEVER give food, water, or oral glucose</strong>. Seek emergency medical assistance immediately.
+  </p>
+</div>
+<div class="card">
+  <h2>Saved Emergency Contacts</h2>
+  <p style="margin-top:8px;">Emergency Contact: {{ profile.emergency_contact_name or 'Not set' }} ({{ profile.emergency_contact_phone or 'No phone' }})</p>
+  <p style="margin-top:6px;">Doctor: {{ profile.doctor_name or 'Not set' }} ({{ profile.doctor_phone or 'No phone' }})</p>
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <h1>Nearby Hospital &amp; Clinic Finder</h1>
+  <p style="color:#64748B;font-size:14px;margin-bottom:14px;">Uses OpenStreetMap Overpass &amp; Nominatim for verified facilities.</p>
+  <button id="gps-btn" class="btn btn-primary" type="button">Use My Current Location</button>
+  <form id="manual-hospital-form" style="margin-top:14px;display:flex;gap:10px;">
+    <input id="hospital-query" type="text" placeholder="Or enter city, locality, or PIN code..." style="margin:0;" />
+    <button class="btn btn-teal" type="submit">Search</button>
+  </form>
+</div>
+<div id="hospital-list"></div>
+{% endblock %}

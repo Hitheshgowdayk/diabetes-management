@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+  <div>
+    <h1>Welcome, {{ user.full_name }}</h1>
+    <p style="color:#64748B;font-size:14px;">Category: {{ profile.diabetes_type if profile else 'Not specified' }}</p>
+  </div>
+  <div style="display:flex;gap:10px;">
+    <a class="btn btn-teal" href="{{ url_for('glucose') }}">Log Glucose</a>
+    <a class="btn btn-danger" href="{{ url_for('emergency') }}">Emergency 112</a>
+  </div>
+</div>
+
+<div class="grid-4">
+  <div class="card"><strong>Total Readings</strong><p style="font-size:28px;margin-top:8px;">{{ total }}</p></div>
+  <div class="card"><strong>Latest Reading</strong><p style="font-size:28px;margin-top:8px;">{{ latest.reading_value ~ ' mg/dL' if latest else '—' }}</p></div>
+  <div class="card"><strong>Fasting Average</strong><p style="font-size:28px;margin-top:8px;">{{ fasting.avg_val ~ ' mg/dL' if fasting.avg_val else '—' }}</p></div>
+  <div class="card"><strong>Post-Meal Average</strong><p style="font-size:28px;margin-top:8px;">{{ post_meal.avg_val ~ ' mg/dL' if post_meal.avg_val else '—' }}</p></div>
+</div>
+
+<div class="card">
+  <h2 style="margin-bottom:12px;">Recent Reading History</h2>
+  {% if recent %}
+  <table>
+    <thead><tr><th>Date &amp; Time</th><th>Category</th><th>Value</th><th>Evaluation</th></tr></thead>
+    <tbody>
+      {% for r in recent %}
+      <tr>
+        <td>{{ r.recorded_at }}</td>
+        <td>{{ 'Fasting' if r.reading_type == 'fasting' else 'Post-Meal' }}</td>
+        <td>{{ r.reading_value }} mg/dL</td>
+        <td>{{ r.evaluation_label }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p style="color:#64748B;">No readings recorded yet. <a href="{{ url_for('glucose') }}">Log your first reading</a>.</p>
+  {% endif %}
+</div>
+{% endblock %}

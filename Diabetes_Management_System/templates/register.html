@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card" style="max-width:460px;margin:40px auto;">
+  <h1 style="margin-bottom:8px;">Create Account</h1>
+  <p style="color:#64748B;font-size:14px;margin-bottom:18px;">Your health records are kept private to your account.</p>
+  <form method="POST">
+    <label>Full Name</label>
+    <input type="text" name="full_name" required minlength="2" />
+    <label>Email</label>
+    <input type="email" name="email" required />
+    <label>Password (min 6 chars)</label>
+    <input type="password" name="password" required minlength="6" />
+    <label>Diabetes Category</label>
+    <select name="diabetes_type">
+      <option value="Type 2">Type 2</option>
+      <option value="Type 1">Type 1</option>
+      <option value="Gestational">Gestational</option>
+      <option value="Not specified">Not specified</option>
+    </select>
+    <button class="btn btn-teal" type="submit" style="width:100%;justify-content:center;">Register</button>
+  </form>
+  <p style="margin-top:16px;font-size:14px;">Already registered? <a href="{{ url_for('login') }}">Sign in</a></p>
+</div>
+{% endblock %}

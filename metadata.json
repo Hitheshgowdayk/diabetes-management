@@ -1,0 +1,6 @@
+{
+  "name": "Diabetes Management System",
+  "description": "A comprehensive healthcare platform for glucose monitoring, trend analysis, emergency safety guidance, nearby hospital discovery, medication reminders, and appointment tracking.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
